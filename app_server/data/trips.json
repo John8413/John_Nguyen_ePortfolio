@@ -1,0 +1,20 @@
+[
+  {
+    "title": "City Adventure",
+    "location": "New York City",
+    "duration": "5 days",
+    "summary": "Exploring New York City."
+  },
+  {
+    "title": "Tropical Adventure",
+    "location": "Hawaii",
+    "duration": "5 days",
+    "summary": "Exploring Hawaii."
+  },
+  {
+    "title": "Paris Adventure",
+    "location": "Paris",
+    "duration": "10 days",
+    "summary": "Exploring Paris."
+  }
+]

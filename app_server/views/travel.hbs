@@ -6,5 +6,16 @@
 <body>
     <h1>{{title}}</h1>
     <p>This is the travel page.</p>
+
+    <ul>
+        {{#each trips}}
+        <li>
+            <h3>{{title}}</h3>
+            <p><strong>Location:</strong> {{location}}</p>
+            <p><strong>Duration:</strong> {{duration}}</p>
+            <p><strong>Summary:</strong> {{summary}}</p>
+        </li>
+        {{/each}}
+    </ul>
 </body>
 </html>
