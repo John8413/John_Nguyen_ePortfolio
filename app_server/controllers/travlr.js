@@ -1,8 +1,12 @@
-// Import trips data
-const trips = require('../data/trips.json');
+// Import the Trip model from Mongoose
+const Trip = require('../models/trip');
 
+// Controller for homepage
 module.exports.home = (req, res) => {
-    res.render('index', { title: 'Travlr Getaways', subtitle: 'Explore Your Next Destination' });
+    res.render('index', {
+        title: 'Travlr Getaways',
+        subtitle: 'Explore Your Next Destination'
+    });
 };
 
 module.exports.about = (req, res) => {
@@ -21,12 +25,18 @@ module.exports.news = (req, res) => {
     res.render('news', { title: 'News' });
 };
 
-// Updated travel route with JSON data
-module.exports.travel = (req, res) => {
-    res.render('travel', {
-        title: 'Travel Destinations',
-        trips: trips
-    });
+// Updated travel route to fetch data from MongoDB
+module.exports.travel = async (req, res) => {
+    try {
+        const trips = await Trip.find(); 
+        res.render('travel', {
+            title: 'Travel Destinations',
+            trips: trips
+        });
+    } catch (err) {
+        console.error('Error fetching trips:', err);
+        res.status(500).send('Internal Server Error');
+    }
 };
 
 module.exports.contact = (req, res) => {
