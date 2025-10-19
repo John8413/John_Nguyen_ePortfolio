@@ -1,0 +1,54 @@
+<div class="container py-4">
+  <h2 class="mb-4">{{ title() }}</h2>
+
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Name</label>
+        <input class="form-control" formControlName="name" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Code</label>
+        <input class="form-control" formControlName="code" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Length (days)</label>
+        <input type="number" class="form-control" formControlName="length" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Price per person (USD)</label>
+        <input type="number" class="form-control" formControlName="perPerson" />
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Start date</label>
+        <input type="date" class="form-control" formControlName="start" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Resort</label>
+        <input class="form-control" formControlName="resort" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Image URL</label>
+        <input class="form-control" formControlName="image" />
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea rows="4" class="form-control" formControlName="description"></textarea>
+      </div>
+    </div>
+
+    <div class="mt-3 d-flex gap-2">
+      <button class="btn btn-primary" type="submit" [disabled]="saving()">Save</button>
+      <a class="btn btn-outline-secondary" [routerLink]="['/admin/trips']">Cancel</a>
+    </div>
+
+    <div *ngIf="error()" class="alert alert-danger mt-3">{{ error() }}</div>
+  </form>
+</div>

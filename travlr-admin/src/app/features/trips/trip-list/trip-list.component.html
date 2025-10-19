@@ -1,0 +1,47 @@
+<!-- travlr-admin/src/app/features/trips/trip-list/trip-list.component.html -->
+<section class="toolbar" style="display:flex; gap:.5rem; align-items:center; margin-bottom:1rem;">
+  <input [formControl]="search"
+         (input)="onFilterChanged()"
+         placeholder="Search trips..."
+         aria-label="Search trips" />
+
+  <select [formControl]="resort" (change)="onFilterChanged()" aria-label="Resort filter">
+    <option [ngValue]="null">All resorts</option>
+    <!-- add your actual resort values below -->
+    <option value="Maui">Maui</option>
+    <option value="Oahu">Oahu</option>
+    <option value="Kauai">Kauai</option>
+  </select>
+
+  <!-- (optional) you can expose sort controls too
+  <select [(ngModel)]="sort" (change)="onFilterChanged()">
+    <option value="start">Start date</option>
+    <option value="createdAt">Created</option>
+  </select>
+  <select [(ngModel)]="dir" (change)="onFilterChanged()">
+    <option value="asc">↑ Asc</option>
+    <option value="desc">↓ Desc</option>
+  </select>
+  -->
+</section>
+
+<div *ngIf="loading">Loading…</div>
+
+<ul *ngIf="!loading && trips.length; else empty">
+  <li *ngFor="let t of trips" style="margin-bottom:.5rem;">
+    <strong>{{ t.name }}</strong>
+    — {{ t.resort }}
+    • starts {{ t.start | date:'mediumDate' }}
+    • ${{ t.perPerson }} / person
+  </li>
+</ul>
+
+<ng-template #empty>
+  <p *ngIf="!loading">No trips found.</p>
+</ng-template>
+
+<nav class="pager" style="display:flex; gap:1rem; align-items:center; margin-top:1rem;">
+  <button (click)="prevPage()" [disabled]="page === 0">Prev</button>
+  <span>Page {{ page + 1 }} of {{ Math.ceil(total / pageSize) || 1 }}</span>
+  <button (click)="nextPage()" [disabled]="(page + 1) * pageSize >= total">Next</button>
+</nav>
